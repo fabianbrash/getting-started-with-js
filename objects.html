@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with JS Objects</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #1ce;
+            padding: 30px; 
+        }
+    
+    </style>
+</head>
+<body>
+ 
+<script>
+
+  const hero = {
+    name: 'Bruce Wayne',
+    alias: 'Batman',
+    catchphrase: 'To the Batcave',
+    speak: function() {
+      return 'Attention! ' + this.catchphrase;
+    },
+    attack: function(sound) {
+      return `(punches bad guy) ${sound}`;
+    }
+  }
+  const thingToLookFor = 'alias';
+  console.log(hero.name);
+  console.log(hero['name']);
+  console.log(hero[thingToLookFor]);
+  
+  // accessing methods
+
+  console.log(hero.speak());
+  console.log(hero.speak);
+  console.log(hero.attack('POWWWW'));
+
+  'this is my string'.toUpperCase();
+
+
+  // primitives
+const primitiveString = 'my string';
+const primitiveNum   = 47;
+
+// objects
+const myObjString = String('my string');
+const myObjNum   = Number(47);
+    
+</script>
+
+
+</body>
+</html>

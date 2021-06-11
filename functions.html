@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with JS Functions</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #1ce;
+            padding: 30px; 
+        }
+    
+    </style>
+</head>
+<body>
+ 
+    <div class="text-center">
+        <button type="button" class="btn btn-danger" onClick="saySomething('this is the first button', true)">
+            My Button
+        </button>
+        <button type="button" class="btn btn-danger" onClick="saySomething('this is the second button', true)">
+            My 2nd Button
+        </button>
+    </div>
+    
+<script>
+    function saySomething(message = 'goodbye', whisper = false) {
+      console.log(message);
+      if(whisper) {
+        console.log(`%c${message}`, 'font-size:5px');
+      } else {
+        console.log(message);
+      }
+    }
+
+    saySomething('hello');
+    saySomething('hello', true);
+
+    /* function squared(a) {
+        return a * a;
+    
+    }
+
+    const newSquared = squared(3);
+    console.log(newSquared); */
+
+
+    const squared = function(a) {
+      return a * a;
+    }
+
+    console.log(squared(12));
+
+    const squareIt = squared;
+
+    console.log(squareIt(13));
+
+    const squareArrow = (a) => {
+      return a * a;
+    }
+    
+    // When declaring with function hoisting happens, where this will be placed at the top of our code.
+    function punch() {
+      console.log('punch');
+    }
+
+</script>
+
+
+</body>
+</html>
