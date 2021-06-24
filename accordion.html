@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <style>
+        body {
+            background-color:ghostwhite;
+            padding: 30px; 
+        }
+        html {
+          overflow-y: scroll;
+        }
+        .btn-block {
+          display: block !important;
+          text-align: center !important;
+          width: 100% !important;
+        }
+
+        ul {
+          margin-bottom: 0;
+        }
+
+        .accordion {
+          background: #FFFFFF;
+          border-radius: 5px;
+          padding: 30px;
+        }
+
+        .question {
+          border-top: 1px solid #EEE;
+          padding: 20px;
+          cursor: pointer;
+          position: relative;
+        }
+
+        .question h2 {
+          font-size: 20px;
+          margin: 0;
+          color: #C00C00;
+        }
+
+        .question .icon {
+          position: absolute;
+          right: 20px;
+          top: 0;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          color: #C00C00;
+          transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+        }
+
+        .answer {
+          max-height: 0;
+          overflow: hidden;
+          transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+        }
+
+        .answer p {
+          padding: 20px;
+          font-size: 14px;
+        }
+        .accordion li.open .question .icon {
+          transform: rotate(180deg);
+        }
+
+        .accordion li.open .answer {
+          max-height: 150px;
+
+        }
+    
+    </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="accordion">
+      <ul class="list-unstyled">
+        <!-- <li class="open">-->
+        <li>
+          <div class="question">
+            <h2>Will I be rich?</h2>
+             <!-- We will use the new bootstrap 5 icons here -->
+             <span><i class="bi bi-chevron-down icon"></i></i></span>
+          </div>
+          <div class="answer">
+           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </div>
+        </li>
+      <li>
+        <div class="question">
+          <h2>What's for dinner?</h2>
+           <!-- We will use the new bootstrap 5 icons here -->
+           <span><i class="bi bi-chevron-down icon"></i></span>
+        </div>
+        <div class="answer">
+         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+      </li>
+      <li>
+        <div class="question">
+          <h2>Is Javascript awesome?</h2>
+           <!-- We will use the new bootstrap 5 icons here -->
+           <span><i class="bi bi-chevron-down icon"></i></i></span>
+        </div>
+        <div class="answer">
+         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+      </li>
+      </ul>
+    </div>
+  </div>
+  
+
+<script>
+    // grab evrything we need from the DOM
+    const accordion = document.querySelector('.accordion');
+    const items     = accordion.querySelectorAll('li');
+    const questions = accordion.querySelectorAll('.question');
+    
+    
+    // create the functions we need
+    
+    function toggleAccordion() {
+      console.log(this.parentNode);
+      const thisItem = this.parentNode;
+      
+      items.forEach(item => {
+        if(thisItem == item) {
+          thisItem.classList.toggle('open');
+          return;
+        }
+
+        item.classList.remove('open');
+
+      });
+      //thisItem.classList.toggle('open');
+
+    }
+    
+    
+    // add our event listeners
+
+    questions.forEach((question) => question.addEventListener('click', toggleAccordion));
+    
+
+
+</script>
+
+
+</body>
+</html>
