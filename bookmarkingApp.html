@@ -82,7 +82,8 @@
         }
 
         .bookmark {
-          display: block;
+          display: flex;
+          position: relative;
           background: #FFFFFF;
           color: #999;
           padding: 20px;
@@ -104,6 +105,35 @@
           border-bottom-left-radius: 5px;
           border-bottom-right-radius: 5px;
           border-bottom: 0;
+        }
+
+        .bookmark .img {
+          background-color: #DDD;
+          border-radius: 3px;
+          background-image: url('https://pbs.twimg.com/profile_images/998270378664378369/nVj_2oyf_400x400.jpg');
+          background-size: cover;
+          width: 80px;
+          height: 60px;
+          margin-right: 20px;
+        }
+
+        .bookmark .title {
+          display: flex;
+          align-items: center;
+        }
+
+        .bookmark .icon {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: #CCC;
+          font-size: 12px;
+          transition: 0.3s ease color;
+          cursor: pointer;
+        }
+
+        .bookmark .icon:hover {
+          color: #888;
         }
         
         
@@ -163,7 +193,7 @@
     const bookmarks     = JSON.parse(localStorage.getItem('bookmarks')) || [];
 
     fillBookmarksList(bookmarks);
-    console.table(bookmarks);
+    // console.table(bookmarks);
     
     function createBookmark(e) {
       e.preventDefault();
@@ -200,10 +230,12 @@
     function fillBookmarksList(bookmarks = []) {
         // we can use const here instead of let because map does not mutate bookmarks
         // at returns a new array 
-        const bookmarksHtml = bookmarks.map((bookmark) => {
+        const bookmarksHtml = bookmarks.map((bookmark, i) => {
           return `
-          <a href="#" class="bookmark">
-            ${bookmark.title}
+          <a href="#" class="bookmark" data-id="${i}">
+            <div class="img"></div>
+            <div class="title">${bookmark.title}</div>
+            <i class="bi bi-bookmark-x icon"></i>
           </a>
           `;
         }).join('');
@@ -221,10 +253,31 @@
         
     }
 
+    function removeBookmark(e) {
+      // console.log(e);
+
+      if(!e.target.matches('.icon')) return;
+
+      // find the index of the bookmark
+      // remove from the bookmarks using splice
+      // store back in localStorage
+
+      // console.log('hello');
+      const index = e.target.parentNode.dataset.id;
+
+      bookmarks.splice(index, 1);
+      fillBookmarksList(bookmarks);
+      storeBookmarks(bookmarks);
+
+      // console.dir(index);
+      
+    }
+
     function storeBookmarks(bookmarks = []) {
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
     bookmarkForm.addEventListener('submit', createBookmark);
+    bookmarksList.addEventListener('click', removeBookmark);
     
 
 </script>
