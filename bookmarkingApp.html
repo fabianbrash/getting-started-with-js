@@ -155,14 +155,35 @@
     overlay.addEventListener('click', closeFloater);
 
     // ==============================================
+    // localStorage.setItem('my_thing', 'something');
+
     const bookmarksList = document.querySelector('.bookmarks-list');
-    const bookmarkForm = document.querySelector('.bookmark-form');
+    const bookmarkForm  = document.querySelector('.bookmark-form');
     const bookmarkInput = bookmarkForm.querySelector('input[type=text]');
+    const bookmarks     = JSON.parse(localStorage.getItem('bookmarks')) || [];
+
+    fillBookmarksList(bookmarks);
+    console.table(bookmarks);
     
     function createBookmark(e) {
       e.preventDefault();
 
+      // add a new bookmark to bookmarks
       const title        = bookmarkInput.value;
+      const bookmark     = {
+        title,
+      }
+
+      bookmarks.push(bookmark);
+      fillBookmarksList(bookmarks);
+      storeBookmarks(bookmarks);
+      bookmarkForm.reset();
+
+      // console.table(bookmarks);
+
+      // save that bookmarks to localStorage
+
+      /* const title        = bookmarkInput.value;
       const bookmark     = document.createElement('a');
       bookmark.className = 'bookmark';
       bookmark.innerText = title;
@@ -170,16 +191,39 @@
       bookmark.target    = '_blank';
       console.log(bookmark);
 
-      bookmarksList.appendChild(bookmark);
-
-      bookmarkForm.reset();
+      bookmarksList.appendChild(bookmark); */
 
       //console.log('Processing the form...');
     
     }
 
+    function fillBookmarksList(bookmarks = []) {
+        // we can use const here instead of let because map does not mutate bookmarks
+        // at returns a new array 
+        const bookmarksHtml = bookmarks.map((bookmark) => {
+          return `
+          <a href="#" class="bookmark">
+            ${bookmark.title}
+          </a>
+          `;
+        }).join('');
+        bookmarksList.innerHTML = bookmarksHtml; 
+        /* let bookmarksHtml = '';
+        for(i = 0; i < bookmarks.length; i++) {
+          bookmarksHtml += `
+            <a href="#" class="bookmark">
+              ${bookmarks[i].title}
+            </a>
+          
+          `;
+        } */
+        // console.log(bookmarksHtml);
+        
+    }
 
-
+    function storeBookmarks(bookmarks = []) {
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
     bookmarkForm.addEventListener('submit', createBookmark);
     
 
